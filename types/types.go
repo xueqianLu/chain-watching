@@ -2,6 +2,7 @@ package types
 
 import "encoding/json"
 
+// node self status
 type Status struct {
 	PeerID        string `json:"peerid"`
 	CurrentHeader string `json:"currentHeader"`
@@ -13,6 +14,12 @@ type Status struct {
 	Starttime     string `json:"starttime"`
 }
 
+func (p Status) String() string {
+	d, _ := json.Marshal(p)
+	return string(d)
+}
+
+// node connect peers' info.
 type PeerInfo struct {
 	PeerID      string `json:"peerid"`
 	Coinbase    string `json:"coinbase"`
@@ -21,6 +28,12 @@ type PeerInfo struct {
 	GHPBVersion string `json:"ghpbVersion"`
 	ConnectTime string `json:"connectTime"`
 	NodeType    string `json:"nodetype"`
+}
+
+//
+type Node struct {
+	SelfStatus Status     `json:"status"`
+	PeersInfo  []PeerInfo `json:"peers"`
 }
 
 func (p PeerInfo) String() string {
